@@ -16,9 +16,12 @@ void print(node_t *head) {
 	}
 }
 
+void * empty() {
+	return malloc(sizeof(node_t));
+}
+
 int main() {
-	node_t *head = NULL;
-	head = malloc(sizeof(node_t));
+	node_t *head = empty();
 	head->value = 1;
 	head->next = malloc(sizeof(node_t));
 	head->next->value = 2;
