@@ -7,17 +7,26 @@ typedef struct node {
 	struct node *next;
 } node_t;
 
+struct node *rest(node_t *list);
+
 void print(node_t *head) {
 	node_t *current = head;
 
 	while (current != NULL) {
 		printf("%d\n", current->value);
-		current = current->next;
+		current = rest(current);
 	}
 }
 
-void * empty() {
+void *empty() {
 	return malloc(sizeof(node_t));
+}
+
+struct node *rest(node_t *list) {
+	if(list != NULL) {
+		return list->next;
+	}
+	return NULL;
 }
 
 int main() {
