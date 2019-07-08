@@ -7,9 +7,10 @@ typedef struct node {
 	struct node *next;
 } node_t;
 
-struct node *rest(node_t *list);
-int first(node_t *list);
-struct node *append(node_t *list, int);
+struct node *rest(node_t*);
+int first(node_t*);
+struct node *append(node_t *, int);
+struct node *concat(node_t *, node_t*);
 
 void print(node_t *head) {
 	if(head->next == NULL) {
@@ -34,6 +35,17 @@ int first(node_t *list) {
 	return -1;
 }
 
+struct node *last(node_t *list) {
+	if(list == NULL) {
+		return list;
+	}
+	node_t *current = list;
+	while(current->next != NULL) {
+		current = rest(current);
+	}
+	return current;
+}
+
 struct node *rest(node_t *list) {
 	if(list != NULL) {
 		return list->next;
@@ -42,6 +54,9 @@ struct node *rest(node_t *list) {
 }
 
 struct node *append(node_t *list, int elem) {
+	if(list == NULL) {
+		list = empty();
+	}
 	node_t *current = list;
 
 	while(current->next != NULL) {
@@ -57,16 +72,31 @@ struct node *append(node_t *list, int elem) {
 	return list;
 }
 
+struct node *concat(node_t *a, node_t *b) {
+	if(a == NULL) {
+		a = empty();
+	}
+	if(b == NULL) {
+		b = empty();
+	}
+	last(a)->next=b->next;
+	return a;
+}
+
 int main() {
-	node_t *list = empty();
+	node_t *a = empty();
 
-	append(list, 1);
-	append(list, 2);
-	append(list, 3);
+	append(a, 1);
+	append(a, 2);
+	append(a, 3);
 
-	print(list);
+	node_t *b = empty();
+	append(b, 4);
+	append(b, 5);
 
-	print(empty());
+
+	print(concat(a, b));
+
 
 	return 0;
 }
