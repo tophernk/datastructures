@@ -86,14 +86,14 @@ struct node *concat(node_t *a, node_t *b) {
 int main() {
 	node_t *a = empty();
 
-	append(a, 1);
-	append(a, 2);
-	append(a, 3);
+	for(int i=0; i<20; i++) {
+		append(a, i);
+	}
 
 	node_t *b = empty();
-	append(b, 4);
-	append(b, 5);
-
+	for(int i=20; i<40; i++) {
+		append(b, i);
+	}
 
 	print(concat(a, b));
 
