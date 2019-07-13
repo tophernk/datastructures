@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct node {
 	int value;
@@ -9,10 +10,11 @@ typedef struct node {
 
 struct node *rest(node_t*);
 int first(node_t*);
-struct node *append(node_t *, int);
-struct node *concat(node_t *, node_t*);
+struct node *append(node_t*, int);
+struct node *concat(node_t*, node_t*);
+bool is_empty(node_t*);
 
-void print(node_t *head) {
+void print_list(node_t *head) {
 	if(head->next == NULL) {
 		return;
 	}
@@ -24,8 +26,17 @@ void print(node_t *head) {
 	}
 }
 
+void print_bool(bool b) {
+	printf(b ? "true" : "false");
+	printf("\n");
+}
+
 void *empty() {
 	return malloc(sizeof(node_t));
+}
+
+bool is_empty(node_t *list) {
+	return list->next == NULL;
 }
 
 int first(node_t *list) {
@@ -95,8 +106,11 @@ int main() {
 		append(b, i);
 	}
 
-	print(concat(a, b));
+	print_list(concat(a, b));
 
+	print_bool(is_empty(a));
+	print_bool(is_empty(b));
+	print_bool(is_empty(empty()));
 
 	return 0;
 }
