@@ -34,11 +34,27 @@ tree_t *maketree(tree_t *l,int v, tree_t *r) {
     t->root=n;
 }
 
+int key(tree_t *t) {
+    return t->root->value;
+}
+
+tree_t *left(tree_t *t) {
+    return t->root->left;
+}
+
+tree_t *right(tree_t *t) {
+    return t->root->right;
+}
+
+bool is_empty(tree_t *t) {
+    return t->root == NULL;
+}
+
 void print_tree(tree_t *t) {
     if(t->root != NULL) {
-        printf("%d\n", t->root->value);
-        print_tree(t->root->left);
-        print_tree(t->root->right);
+        printf("%d\n", key(t));
+        print_tree(left(t));
+        print_tree(right(t));
     }
 }
 
@@ -47,6 +63,9 @@ int main() {
     tree_t *r = maketree(empty(), 2, empty());
     tree_t *t = maketree(l, 0, r);
     print_tree(t);
+
+    printf("%s\n", is_empty(t) ? "true" : "false");
+    printf("%s\n", is_empty(empty()) ? "true" : "false");
 
     return 0;
 }
